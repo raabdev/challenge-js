@@ -1,28 +1,13 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
-const mysql = require('mysql')
 
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
+
+app.use(express.json())
 
 // settings
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 3050)
 
-// mysql
-const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'Roi419021?',
-    database: 'budgets'
-})
-
-// check connect
-connection.connect(error => {
-    if (error) throw error;
-    console.log('Database server running!')
-})
 
 // middlewares
 app.use(morgan('dev'))
