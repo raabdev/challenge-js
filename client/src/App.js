@@ -1,9 +1,19 @@
+import React from 'react'
+import Nav from './components/Nav'
+import TaskForm from './components/TaskForm'
+import List from './components/List'
 
-
-function App() {
+export default function App() {
+  
   return (
-    <div>hola</div>
-  );
+    <div>
+      <Nav />
+      <div className="container">
+        <div className="row">
+          <TaskForm />
+          <List />
+        </div>
+      </div>
+    </div>
+  )
 }
-
-export default App;
