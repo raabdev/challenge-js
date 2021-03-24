@@ -9,36 +9,41 @@ export default class TaskForm extends Component {
     
     
     onSubmit = e => {
-        e.preventDefault()
-        const form = document.getElementById('form')
-        const data = new FormData(form)
+
         const concept = document.getElementById('concept')
+        const type = document.getElementById('type')
         const amount = document.getElementById('amount')
-        const type = document.getElementById('select')
-        data.set('concept', concept.value)
-        data.append('amount', amount.value)
-        data.append('type', type.value)
-        fetch('http://localhost:3050/add',{
+
+        fetch ('http://localhost:3050/add', {
             method: 'POST',
-            body: {
-                "type": type.value,
-                "amount": amount.value,
-                "concept": concept.value
+            mode: 'cors',
+            body: JSON.stringify({
+                concept: concept.value,
+                type: type.value,
+                amount: amount.value
+            }),
+            headers: { 'Content-Type': 'application/json' }
+          })
+          .then(res => res.json())
+          .then(res => {
+            if (res.success) { // exito
+              alert('Categoría creada');
             }
-        })
-        console.log(data.get('concept'))
-        console.log(data.get('type'))
+          });
+
+          e.preventDefault()
+        
     }
 
     
     
     render() {
         return (
-            <form className="col-5 card p-3 mx-auto my-2" method="POST" id="form" name="form" onSubmit={this.onSubmit} action="http://localhost:3050/add">
+            <form className="col-5 card p-3 mx-auto my-2" method="POST" id="form" name="form" onSubmit={this.onSubmit} action="#">
                 <h6 className="text-center">Add new ticket</h6>
                 <div className="form-group">
                     <label for="select">Type</label>
-                    <select className="form-control" name="type" id="select">
+                    <select className="form-control" name="type" id="type">
                         <option value="0">Entry</option>
                         <option value="1">Expense</option>
                     </select>

@@ -36,8 +36,8 @@ router.get('/tickets/:id', (req, res) => {
     })
 })
 
-router.post('/add', (req, res, next) => {
-    
+router.post('/add', (req, res) => {
+    console.log(req.body)
     const sql = 'INSERT INTO budget SET ?'
     var date = new Date()
     const ticketObj = {
@@ -46,8 +46,6 @@ router.post('/add', (req, res, next) => {
         date: date,
         type: req.body.type
     }
-    
-    console.log(req)
 
     connection.query(sql, ticketObj, error => {
         if (error) throw error

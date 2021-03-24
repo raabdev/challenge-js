@@ -14,9 +14,9 @@ export default function List() {
   return (
     <div className="col-5 card p-3 mx-auto my-2">
       <ul>
-        { !tickets ? 'Loading...' :
-          tickets.map((ticket,index) => {
-            return <li key={index}>{ticket.concept}</li>
+        { !tickets ? 'Loading...' : 
+          tickets.slice(tickets.length-10).reverse().map((ticket,index) => {
+            return <li key={index}>{ticket.concept} | {ticket.type} | {ticket.type===1 ? '+' : '-'} | ${ticket.amount}</li>
           })
         }
       </ul>
